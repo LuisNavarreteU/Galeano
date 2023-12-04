@@ -1,1 +1,25 @@
-<app-header [IsModal]="true" title="Agenda medica"></app-header>
+<app-header [IsModal]="true" title="Finanza"></app-header>
+<ion-content>
+
+    <ion-button mode="ios" class="ion-margin" type="submit" (click)="getUsuario()">
+        Resumen mensual
+        <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-button>
+
+    <ion-list>
+        <ion-item-sliding class="product-item" *ngFor="let s of medicos">
+            <ion-item>
+                <ion-label>
+                    <div class="name">{{ s.medico }}</div>
+                    <div class="data">
+                        <strong>Valor: {{ s.valor }} </strong>
+                    </div>                   
+                </ion-label>
+            </ion-item>
+        </ion-item-sliding>
+        <div class="data">
+            <strong>Valor: {{ sumaValores() }} </strong>
+        </div>
+    </ion-list>
+
+</ion-content>

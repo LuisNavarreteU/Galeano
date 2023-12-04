@@ -1,10 +1,11 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { FirebaseService } from 'Galeano/src/app/services/firebase.service';
+
 import { User } from 'firebase/auth';
 import { Agenda } from 'src/app/model/agenda';
 import { Salida } from 'src/app/model/salida.model';
 import { UtilsService } from 'src/app/services/utils.service';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-finanzas',
@@ -19,7 +20,7 @@ export class FinanzasComponent  implements OnInit {
   esPaciente: boolean = false; // Variable para verificar si el usuario es pasajero
   esConductor: boolean = false;
   esAdmin: boolean = false;
-  medicos: User[] = []
+  medicos: Salida[] = []
 
 
   firebaseSvc = inject(FirebaseService);
@@ -33,26 +34,29 @@ export class FinanzasComponent  implements OnInit {
   }
 
   submit() {
+
   }
 
   ionViewWillEnter() {
     let user1 = this.utilsSvc.getFromLocalStorage('user');
     let usu = user1.name;
-    this.getUsuario();
   }
 
   getUsuario() {
-    let path = 'users';
+    let path = 'salida';
     let user = this.utilsSvc.getFromLocalStorage('user');
     this.firebaseSvc.getColectionData(path).subscribe({
       next: (res: any[]) => {
-        this.medicos = res.filter((p) => p.role === "Conductor");
-        console.log(this.medicos  )
+        this.medicos = res;
       },
       error: (err) => {
         // Manejar errores si es necesario
       },
     });
+  }
+
+  sumaValores(){
+    return this.medicos.reduce((index, medi) => index + medi.valor,0)
   }
 
 }
