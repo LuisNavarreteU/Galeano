@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="secondary">
+
+    <ion-buttons slot="start">
+      <!-- BACK BUTTON -->
+      <ion-back-button *ngIf="backButton" [defaultHref]="backButton"></ion-back-button>
+      <!-- DISMISS MODAL -->
+      <ion-button (click)="dissmissModal()" *ngIf="IsModal">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      <STRONG>{{ title }}</STRONG>
+      <div class="admin">GALEANO</div>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <!-- Agenda -->
+      <ion-button *ngIf="closeButton || esConductor || esAdmin"  class="ion-text-center" (click)="addaGENDA()" >
+        Agenda
+      </ion-button>
+      <!-- fINANZA -->
+       <ion-button *ngIf="closeButton ||  esAdmin"  class="ion-text-right" (click)="finanza()" >
+        Finanzas
+      </ion-button>
+
+      <!-- CLOSE BUTTON -->
+      <ion-button *ngIf="closeButton" (click)="signOut()" class="ion-text-right">
+        <ion-icon name="close-circle-outline"></ion-icon>Salir
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
